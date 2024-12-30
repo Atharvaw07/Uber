@@ -141,3 +141,77 @@ The request body should be a JSON object with the following fields:
 ### Notes
 - The `password` field is compared with the hashed password stored in the database.
 - A JWT token is generated and returned upon successful login.
+
+# User Profile Endpoint
+
+## GET /users/profile
+
+### Description
+This endpoint is used to retrieve the profile of the logged-in user. It requires a valid JWT token.
+
+### Request Headers
+- `Authorization`: A string containing the JWT token in the format `Bearer <token>`.
+
+### Responses
+
+#### Success
+- **Status Code**: 200 OK
+- **Response Body**:
+  ```json
+  {
+    "user": {
+      "_id": "user_id_here",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "john.doe@example.com",
+      // ...other user fields...
+    }
+  }
+  ```
+
+#### Unauthorized
+- **Status Code**: 401 Unauthorized
+- **Response Body**:
+  ```json
+  {
+    "message": "Unauthorized"
+  }
+  ```
+
+### Notes
+- The JWT token is verified before retrieving the user profile.
+
+# User Logout Endpoint
+
+## POST /users/logout
+
+### Description
+This endpoint is used to log out a user. It requires a valid JWT token.
+
+### Request Headers
+- `Authorization`: A string containing the JWT token in the format `Bearer <token>`.
+
+### Responses
+
+#### Success
+- **Status Code**: 200 OK
+- **Response Body**:
+  ```json
+  {
+    "message": "User logged out successfully"
+  }
+  ```
+
+#### Unauthorized
+- **Status Code**: 401 Unauthorized
+- **Response Body**:
+  ```json
+  {
+    "message": "Unauthorized"
+  }
+  ```
+
+### Notes
+- The JWT token is invalidated upon successful logout.
